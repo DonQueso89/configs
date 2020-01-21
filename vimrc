@@ -23,11 +23,11 @@
 " https://github.com/gmarik/vundle
 " To install vundle, copy all the files from the repo into your respective
 " folders within ~/.vim
-set nocompatible " Fuck VI... That's for grandpas.
+set nocompatible " no VI
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 set rtp+=/usr/local/opt/fzf
 
@@ -37,7 +37,7 @@ set rtp+=/usr/local/opt/fzf
 " Plugin 'githubUsername/repoName'
 
 " Let vundle manage itself:
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " Just a shitload of color schemes.
 " https://github.com/flazz/vim-colorschemes#current-colorschemes
@@ -80,7 +80,14 @@ Plugin 'vim-airline/vim-airline'
 " Vim code completer TODO
 Plugin 'Valloric/YouCompleteMe'
 
+" Black formatter
+Plugin 'psf/black'
 
+" Import sorting
+Plugin 'fisadev/vim-isort'
+
+
+call vundle#end()
 
 " We have to turn this stuff back on if we want all of our features.
 filetype plugin indent on " Filetype auto-detection
@@ -163,6 +170,9 @@ noremap k gk
 " Map the key for toggling comments with vim-commentary
 nnoremap <leader>c <Plug>CommentaryLine
 
+" Shortcut for black formatter
+nnoremap <leader>b :Black<CR>
+
 " Let ctrlp have up to 30 results.
 let g:ctrlp_max_height = 10
 
@@ -175,6 +185,12 @@ let g:ale_linters = {
 \   'python': ['flake8'],
 \   'scala': ['scalac'],
 \}
+
+" Solve issue with disappearing cursor when there are linting warnings
+let g:ale_echo_cursor = 0
+
+let g:vim_isort_map= '<C-i>'
+
 " Finally the color scheme. Choose whichever you want from the list in the
 " link above (back up where we included the bundle of a ton of themes.)
 colorscheme molokai
